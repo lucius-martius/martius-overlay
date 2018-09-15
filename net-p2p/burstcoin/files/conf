@@ -1,0 +1,8 @@
+# The group under which the wallet is run
+BURST_USER=burst
+
+# The user under which the wallet is run
+BURST_GROUP=burst
+
+# Location of the pidfile for the burst daemon
+PID_FILE="/var/run/burst/burst.pid"
