@@ -1,0 +1,11 @@
+# The group of the monero daemon
+MONEROD_USER=monero
+
+# The user of the monero daemon
+MONEROD_GROUP=monero
+
+# Location of the pidfile for the monero daemon
+PID_FILE="/var/run/monero/monerod.pid"
+
+# Location of the monero blockchain
+DATA_DIR="/var/lib/monero"
