@@ -7,12 +7,12 @@ inherit cmake-utils flag-o-matic
 
 DESCRIPTION="Monero all-round miner"
 HOMEPAGE="https://www.mullvad.net/"
-SRC_URI="https://github.com/fireice-uk/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/fireice-uk/${PN}/archive/${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+aeon +donate cuda +hwloc +microhttpd opencl ssl static +xmr"
+IUSE="+donate cuda +hwloc +microhttpd opencl ssl static"
 
 RDEPEND="microhttpd? ( net-libs/libmicrohttpd )
          ssl? ( dev-libs/openssl )
@@ -43,38 +43,12 @@ src_configure(){
         -DCUDA_ENABLE=$(usex cuda ON OFF )
     )
 
-    if use xmr && ! use aeon; then
-        mycmakeargs+=(
-            -DXMR-STAK_CURRENCY=monero
-        )
-    elif use aeon && ! use xmr; then
-        mycmakeargs+=(
-            -DXMR-STAK_CURRENCY=aeon
-        )
-    fi
-
     cmake-utils_src_configure
 }
 
 src_install(){
     newconfd ${FILESDIR}/conf xmr-stak
     newinitd ${FILESDIR}/init xmr-stak
-
-    #Generate config files
-    printf "%s\n%s\n%s\n%s\n%s\n%s" \
-           "pool.usxmrpool.com:3333" \
-           "<wallet-address>" "" "y" "n" "n" \
-      | ${BUILD_DIR}/bin/xmr-stak > /dev/null &
-    pid=$!
-    sleep 1
-    kill ${pid}
-
-    insinto /etc/xmr-stak/
-    doins ${S}/config.txt
-    doins ${S}/cpu.txt
-
-    use cuda && doins ${S}/nvidia.txt
-    use opencl && doins ${S}/amd.txt
 
     dobin ${BUILD_DIR}/bin/xmr-stak
 
@@ -85,4 +59,16 @@ src_install(){
     if use opencl; then
         dolib ${BUILD_DIR}/bin/libxmrstak_opencl_backend.so
     fi
+}
+
+pkg_postinst() {
+	if [ ! -e "${ROOT}etc/xmr-stak/main.config" ]; then
+		ewarn "To use xmr-stack:"
+		if use cuda || use opencl; then
+			ewarn ">our user must be a member of the 'video' group."
+		fi
+		ewarn "To generate config files, run as root"
+		ewarn "/usr/bin/xmr-stak --cpu /etc/xmr-stak/cpu --amd /etc/xmr-stak/amd --nvidia /etc/xmr-stak/nvidia -c /etc/xmr-stak/config"
+		ewarn "If the systemd will be used, xmr-stak can now be terminated and 'systemctl start xmr-stak' can be used."
+	fi
 }
