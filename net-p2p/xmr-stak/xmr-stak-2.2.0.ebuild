@@ -19,7 +19,7 @@ RDEPEND="microhttpd? ( net-libs/libmicrohttpd )
          hwloc? ( sys-apps/hwloc )
          cuda? ( dev-util/nvidia-cuda-toolkit )
          opencl? ( virtual/opencl )
-         <=sys-devel/gcc-6.4.0"
+         <=sys-devel/gcc-6.4.9999"
 
 CMAKE_BUILD_TYPE=Release
 
