@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+
+start(){
+    ebegin "Starting Monero CPU miner"
+    start-stop-daemon --background --start --exec /usr/bin/xmr-stak-cpu \
+    --make-pidfile --pidfile /var/run/xmr-stak-cpu.pid \
+    -u ${MINER_USER} \
+    -- /etc/xmr-stak/cpu/config.txt
+    eend $?
+}
+
+stop(){
+    ebegin "Stopping Monero CPU miner"
+    start-stop-daemon --stop --exec /usr/bin/xmr-stak-cpu \
+    --pidfile /var/run/xmr-stak-cpu.pid
+    eend $?
+}

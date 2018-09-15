@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+
+start(){
+    ebegin "Starting Monero NVIDIA GPU miner"
+    start-stop-daemon --background --start --exec /usr/bin/xmr-stak-nvidia \
+    --make-pidfile --pidfile /var/run/xmr-stak-nvidia.pid \
+    -u ${MINER_USER} \
+    -- /etc/xmr-stak/nvidia/config.txt
+    eend $?
+}
+
+stop(){
+    ebegin "Stopping Monero NVIDIA GPU miner"
+    start-stop-daemon --stop --exec /usr/bin/xmr-stak-nvidia \
+    --pidfile /var/run/xmr-stak-nvidia.pid
+    eend $?
+}

@@ -1,0 +1,14 @@
+diff -crB a/donate-level.h b/donate-level.h
+*** a/donate-level.h	2017-04-29 18:20:06.000000000 +0200
+--- b/donate-level.h	2017-06-03 03:24:08.886204741 +0200
+***************
+*** 12,15 ****
+   *
+   */
+  
+! constexpr double fDevDonationLevel = 1.0 / 100.0;
+--- 12,15 ----
+   *
+   */
+  
+! constexpr double fDevDonationLevel = 0.0 / 100.0;

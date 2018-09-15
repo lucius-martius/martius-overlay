@@ -1,0 +1,5 @@
+#set the user with which the miner runs
+MINER_USER=miner
+
+#set the log-file location
+LOG_FILE=/var/log/xmr-stak-cpu.log
