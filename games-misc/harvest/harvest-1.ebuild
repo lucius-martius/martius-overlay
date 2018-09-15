@@ -17,3 +17,8 @@ RDEPEND="media-libs/libogg[abi_x86_32]
          media-gfx/nvidia-cg-toolkit[abi_x86_32]
          x11-libs/gtk+:2[abi_x86_32]
          media-libs/libcanberra[abi_x86_32]"
+
+pkg_postinst() {
+    ewarn "This only pulls in the dependencies, NOT the actual game itself."
+    ewarn "Install the game via steam or humble-bundle or something!"
+}
