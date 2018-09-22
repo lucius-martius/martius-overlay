@@ -1,16 +1,17 @@
 #!/sbin/openrc-run
 
 depend() {
-    need net
-    use dns
+    need net mysql
 }
 
 start() {
     ebegin "Starting burst wallet daemon"
     checkpath -d -m 0755 -o ${BURST_USER}:${BURST_GROUP} /var/run/burst
     start-stop-daemon --start --quiet --background \
-    --chdir /opt/burst/ --exec /opt/burst/burst.sh \
-    --user ${BURST_USER} --group ${BURST_GROUP} --pidfile ${PID_FILE}
+    --chdir /opt/burst/ \
+    --user ${BURST_USER} --group ${BURST_GROUP} \
+    --pidfile ${PID_FILE} --make-pidfile \
+    --exec java -- -cp burst.jar:conf brs.Burst
     eend $?
 }
 
