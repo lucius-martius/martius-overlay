@@ -9,7 +9,7 @@ DESCRIPTION="A private, secure, untraceable, decentralised digital currency"
 HOMEPAGE="https://getmonero.org/"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/monero-project/${PN}"
-EGIT_COMMIT="v0.12.2.0"
+EGIT_COMMIT="v0.12.3.0"
 
 LICENSE=""
 SLOT="0"
