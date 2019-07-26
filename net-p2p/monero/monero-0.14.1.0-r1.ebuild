@@ -21,6 +21,7 @@ RDEPEND="dev-libs/boost
          dev-libs/expat
          dev-libs/openssl
          net-libs/zeromq
+         dev-libs/libsodium
          net-dns/unbound[threads]
          net-libs/cppzmq"
 
