@@ -14,6 +14,7 @@ KEYWORDS="~x86 ~amd64"
 
 
 DEPEND="dev-perl/Config-IniFiles
+        dev-perl/Capture-Tiny
         sys-apps/pv
         app-arch/lzop
         sys-block/mbuffer"
