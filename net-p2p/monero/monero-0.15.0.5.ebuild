@@ -27,6 +27,12 @@ RDEPEND="dev-libs/boost
 
 CMAKE_BUILD_TYPE=Release
 
+src_prepare(){
+    epatch "${FILESDIR}/fix_boost_1_73_compatibility.patch"
+
+    cmake-utils_src_prepare
+}
+
 src_configure(){
     local mycmakeargs=(
         -DSTACK_TRACE=OFF
