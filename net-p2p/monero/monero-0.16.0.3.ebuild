@@ -27,10 +27,13 @@ RDEPEND="dev-libs/boost
 
 CMAKE_BUILD_TYPE=Release
 
+PATCHES=("${FILESDIR}/${PN}-0.16.0.3-fix-boost-1.74.patch")
+
 src_configure(){
     local mycmakeargs=(
         -DSTACK_TRACE=OFF
         -DBUILD_DOCUMENTATION=$(usex doc ON OFF)
+        -DBUILD_SHARED_LIBS=OFF
     )
 
     cmake-utils_src_configure
