@@ -19,7 +19,7 @@ start() {
 
 stop() {
     ebegin "Stopping monero daemon"
-    start-stop-daemon --stop --exec monerod --quiet \
+    start-stop-daemon --stop --exec monerod --quiet --retry ${MONEROD_TERMTIMEOUT} \
     --user ${MONEROD_USER} --group ${MONEROD_GROUP} --pidfile ${PID_FILE}
     eend $?
 }
