@@ -12,3 +12,6 @@ PID_FILE="/var/run/monero/monerod.pid"
 
 # Location of the monero blockchain
 DATA_DIR="/var/lib/monero"
+
+# Extra options passed to monero daemon
+MONEROD_OPTIONS=""

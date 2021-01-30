@@ -41,11 +41,7 @@ src_install(){
     newconfd ${FILESDIR}/conf monerod
     newinitd ${FILESDIR}/init monerod
 
-    dobin ${BUILD_DIR}/bin/monerod
-    dobin ${BUILD_DIR}/bin/monero-wallet-rpc
-    dobin ${BUILD_DIR}/bin/monero-wallet-cli
-    dobin ${BUILD_DIR}/bin/monero-blockchain-export
-    dobin ${BUILD_DIR}/bin/monero-blockchain-import
+    dobin ${BUILD_DIR}/bin/*
 }
 
 pkg_postinst() {
