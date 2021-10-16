@@ -1,0 +1,14 @@
+# The group of the invidious daemon
+INVID_USER=invidious
+
+# The user of the invidious daemon
+INVID_GROUP=invidious
+
+# Location of the pidfile
+PID_FILE="/var/run/invidious.pid"
+
+# Location of the invidious data files
+DATA_DIR="/usr/share/invidious"
+
+# Extra options to pass to invidious
+INVID_OPTIONS=""
