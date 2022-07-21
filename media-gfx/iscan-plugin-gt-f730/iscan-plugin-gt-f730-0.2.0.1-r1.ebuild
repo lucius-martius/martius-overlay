@@ -1,14 +1,14 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="7"
 
-inherit multilib versionator rpm
+inherit multilib rpm
 
 #SRC_REV="4"
 
-MY_PV="$(get_version_component_range 1-3)"
-MY_PVR="$(replace_version_separator 3 -)"
+MY_PV="$(ver_cut 1-3)"
+MY_PVR="$(ver_rs 3 -)"
 MY_P="esci-interpreter-perfection-v330-${MY_PVR}"
 
 DESCRIPTION="Epson Perfection V330 PHOTO scanner plugin for SANE 'epkowa' backend."
