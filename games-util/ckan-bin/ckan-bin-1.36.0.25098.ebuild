@@ -1,4 +1,4 @@
-# Copyright 2020-2023 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,7 +6,12 @@ EAPI=7
 inherit rpm
 
 HOMEPAGE="https://github.com/KSP-CKAN/CKAN/"
-SRC_URI="https://github.com/KSP-CKAN/CKAN/releases/download/v${PV}/ckan-${PV}-1.noarch.rpm -> ${P}.rpm"
+
+if [[ "${PV}" =~ ^([0-9]+?\.[0-9]+?\.[0-9]+?)\..+?$ ]]; then
+  TV=${BASH_REMATCH[1]}
+fi
+
+SRC_URI="https://github.com/KSP-CKAN/CKAN/releases/download/v${TV}/ckan-${PV}-1.noarch.rpm -> ${P}.rpm"
 
 LICENSE="MIT"
 SLOT="0"
@@ -34,8 +39,11 @@ src_install() {
 	insinto "/usr/share/applications/"
 	doins "usr/share/applications/ckan.desktop"
 
-	insinto "/usr/share/icons"
-	doins "usr/share/icons/ckan.ico"
+	local size
+	for size in 16 32 48 64 96 128 256; do
+	  insinto /usr/share/icons/hicolor/${size}x${size}/apps/
+	  newins usr/share/icons/hicolor/${size}x${size}/apps/${PN%-bin}.png ${PN%-bin}.png
+	done;
 
 	doman "ckan.1"
 }
